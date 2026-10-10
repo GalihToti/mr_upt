@@ -4,83 +4,70 @@ Proyek ini adalah Sistem Informasi **Maintenance & Repair** yang dikembangkan kh
 
 ## 🚀 Fitur Utama
 
-*   **Sistem Tiket (Helpdesk):** Dosen, staf, atau mahasiswa dapat melaporkan kerusakan perangkat komputer/jaringan.
-*   **Tracking Perbaikan:** Memantau status laporan kerusakan (Menunggu, Dikerjakan, Selesai, Dibatalkan).
-*   **Manajemen Inventaris:** Pencatatan aset perangkat keras (PC, Printer, Proyektor, Router, dll) yang berada di bawah pengawasan UPT Komputer.
-*   **Log Perbaikan (Riwayat):** Mencatat setiap tindakan perbaikan yang dilakukan oleh teknisi beserta suku cadang yang digunakan.
-*   **Laporan & Statistik:** Rekapitulasi kerusakan per bulan/tahun untuk evaluasi dan pengadaan.
+* **Sistem Tiket (Helpdesk):** Dosen, staf, atau mahasiswa dapat melaporkan kerusakan perangkat komputer/jaringan.
+* **Tracking Perbaikan:** Memantau status laporan kerusakan (Menunggu, Dikerjakan, Selesai, Dibatalkan).
+* **Manajemen Inventaris:** Pencatatan aset perangkat keras (PC, Printer, Proyektor, Router, dll) yang berada di bawah pengawasan UPT Komputer.
+* **Log Perbaikan (Riwayat):** Mencatat setiap tindakan perbaikan yang dilakukan oleh teknisi beserta suku cadang yang digunakan.
+* **Laporan & Statistik:** Rekapitulasi kerusakan per bulan/tahun untuk evaluasi dan pengadaan.
 
 ## 🛠️ Teknologi yang Digunakan
 
-*(Silakan ubah bagian ini sesuai dengan stack teknologi yang Anda gunakan)*
-*   **Backend:** [PHP / Laravel 11 / CodeIgniter]
-*   **Frontend:** [Bootstrap 5 / TailwindCSS / Vue.js]
-*   **Database:** [MySQL / MariaDB]
-*   **Web Server:** [Apache / Nginx / Laragon]
+* **Backend:** PHP Native
+* **Frontend:** HTML5, CSS3 dengan **Tailwind CSS**, JavaScript
+* **Database:** MySQL 
+* **Web Server:** Apache via Laragon
 
 ## 📋 Prasyarat Sistem
 
-Sebelum menginstal proyek ini, pastikan sistem Anda sudah terpasang:
-*   PHP >= 8.1
-*   Composer
-*   MySQL/MariaDB
-*   Node.js & NPM (jika menggunakan frontend build tools)
+Sebelum menjalankan proyek ini, pastikan sistem Anda sudah terpasang:
+
+* Web Server lokal seperti **Laragon** atau **XAMPP** (dengan PHP >= 8.0)
+* MySQL (sudah satu paket di dalam Laragon/XAMPP)
+* Node.js & NPM (Opsional, hanya jika Anda perlu melakukan *compile/build* ulang file Tailwind CSS secara lokal)
 
 ## ⚙️ Cara Instalasi
 
 Ikuti langkah-langkah berikut untuk menjalankan proyek ini di komputer lokal Anda:
 
-1. **Clone Repositori**
-   ```bash
-   git clone https://github.com/[username_anda]/[nama_repo].git
-   cd [nama_repo]
-   ```
+1. **Persiapkan Folder Proyek**
+   * *Clone* repositori ini atau *download* sebagai file ZIP.
+   * Ekstrak dan pindahkan folder proyek ke dalam direktori *document root* server lokal Anda:
+     * Jika menggunakan **Laragon**: pindahkan ke `C:\laragon\www\`
+     * Jika menggunakan **XAMPP**: pindahkan ke `C:\xampp\htdocs\`
 
-2. **Instal Dependensi (Contoh untuk Laravel)**
-   ```bash
-   composer install
-   npm install
-   ```
+2. **Pengaturan Database**
+   * Buka browser dan akses **phpMyAdmin** (biasanya di `http://localhost/phpmyadmin`).
+   * Buat database baru, misalnya dengan nama `db_maintenance_unipma`.
+   * Pilih database tersebut, lalu klik menu **Import**.
+   * Cari dan *upload* file database SQL yang telah disediakan (misalnya: `database.sql` yang ada di dalam folder proyek), lalu klik **Go** atau **Import**.
 
-3. **Pengaturan Database**
-   * Salin file `.env.example` menjadi `.env`:
+3. **Konfigurasi Koneksi PHP**
+   * Buka folder proyek menggunakan teks editor (VS Code, Sublime Text, dll).
+   * Cari file pengaturan koneksi database (biasanya bernama `koneksi.php`, `config.php`, atau `database.php`).
+   * Sesuaikan baris konfigurasi dengan *environment* lokal Anda:
+     ```php
+     $host     = "localhost";
+     $user     = "root";
+     $password = ""; // Kosongkan jika default Laragon/XAMPP
+     $database = "db_maintenance_unipma"; // Sesuaikan dengan nama database yang dibuat
+     ```
+
+4. **Kompilasi Tailwind CSS (Opsional)**
+   * *Catatan: Lewati langkah ini jika file CSS hasil build (misal: `style.css` atau `output.css`) sudah tersedia di folder proyek atau menggunakan CDN.*
+   * Buka terminal di dalam folder proyek, lalu jalankan:
      ```bash
-     cp .env.example .env
+     npm install
+     npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch
      ```
-   * Buka file `.env` dan sesuaikan konfigurasi database Anda:
-     ```env
-     DB_CONNECTION=mysql
-     DB_HOST=127.0.0.1
-     DB_PORT=3306
-     DB_DATABASE=nama_database_unipma
-     DB_USERNAME=root
-     DB_PASSWORD=
-     ```
-
-4. **Generate Key & Migrasi Database**
-   ```bash
-   php artisan key:generate
-   php artisan migrate --seed
-   ```
 
 5. **Jalankan Aplikasi**
-   ```bash
-   php artisan serve
-   ```
-   Aplikasi dapat diakses melalui browser di `http://localhost:8000`.
+   * Buka browser dan ketikkan alamat proyek Anda, contohnya: 
+     `http://localhost/nama_folder_proyek/` (untuk XAMPP) atau `http://nama_folder_proyek.test/` (untuk Laragon).
 
 ## 👥 Kontributor / Tim Pengembang
 
-*   **[Nama Anda]** - *Lead Developer / Programmer*
-*   **[Nama Anggota Tim]** - *System Analyst*
-*   **[Nama Anggota Tim]** - *UI/UX Designer*
+* **[Galih Toti Ilham Prayoga]** - *Lead Developer / Programmer*
+* **[Indra Wibisana]** - *UI/UX Designer*
+* **[5 Orang lainnya]** - *System Analyst*
 
-## 📞 Kontak & Dukungan
-
-Jika ada kendala dalam sistem ini, silakan hubungi UPT Komputer UNIPMA melalui:
-*   **Email:** [email_upt@unipma.ac.id]
-*   **Telepon/WA:** [Nomor Kontak]
-*   **Ruang:** Gedung [Nama Gedung], Lantai [X], Kampus UNIPMA.
-
----
 *Dibuat untuk keperluan akademik dan manajemen internal UPT Komputer UNIPMA.*
